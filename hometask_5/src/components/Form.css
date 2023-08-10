@@ -1,0 +1,21 @@
+.form {
+  padding: 30px 20px;
+  margin-top: 24px;
+  margin-left: 78px;
+  display: flex;
+  justify-content: space-around;
+  width: 50vw;
+  border: 1px solid rgb(20, 22, 124);
+  background-color: rgba(108, 171, 201, 0.582);
+  border-radius: 8px;
+}
+.form input {
+  width: 33vw;
+  padding: 10px 5px;
+}
+.form button {
+  border-radius: 10px;
+
+  padding-top: 5px;
+  padding-bottom: 5px;
+}

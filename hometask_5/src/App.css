@@ -1,0 +1,44 @@
+h1{
+  text-align: center;
+}
+.todo-item{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+}
+.buttons{
+  display: flex;
+
+  /* justify-content: space-around; */
+}
+.buttons button{
+ margin-right: 12px;
+}
+.list{
+  margin-left: 40px;
+  border: 1px solid #e2e2e2;
+  width: 65%;
+  padding: 24px 10px;
+  border-radius: 20px;
+  margin-top: 32px;
+}
+.editForm{
+  padding: 15px;
+  margin: 20px 10px;
+  border: solid 1px;
+  display: flex;
+  justify-content: space-between;
+  width: 33vw;
+}
+.editForm input{
+  margin-right: 24px;
+}
+[data-isdone="true"]{
+  border: solid 1 px green;
+  background-color: rgb(118, 216, 128);
+  border-radius: 12px;
+  opacity: 0.5;
+  color: blue;
+
+}
