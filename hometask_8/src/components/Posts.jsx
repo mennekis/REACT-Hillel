@@ -1,7 +1,7 @@
 import useFetch from "../hooks/useFetch";
 
 const Posts = () => {
-  const [data, error, loading] = useFetch(
+  const [data, error, loading, refetch] = useFetch(
     "https://jsonplaceholder.typicode.com/posts"
   );
 
@@ -13,6 +13,7 @@ const Posts = () => {
       <ul>
         {data.length > 0 && data.map((el) => <li key={el.id}>{el.title}</li>)}
       </ul>
+      <button onClick={refetch}>reload</button>
     </div>
   );
 };

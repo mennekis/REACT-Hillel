@@ -1,37 +1,38 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback, useMemo } from "react";
 
 const useFetch = (url) => {
   const [data, setData] = useState([]);
   const [error, SetError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const [refetch, setRefetch] = useState([]);
+
+  let abortController = useMemo(() => new AbortController(), []);
+
+  const refetch = useCallback(async () => {
+    setIsLoading(true);
+
+    try {
+      const response = await fetch(url, {
+        signal: abortController.signal,
+      });
+      if (!response.ok) {
+        throw Error(" Something wrong with fetching");
+      }
+      const data = await response.json();
+      setData(data);
+    } catch (error) {
+      SetError(error.message);
+    } finally {
+      setIsLoading(false);
+    }
+  }, [url, abortController.signal]);
 
   useEffect(() => {
-    let abortController = new AbortController();
+    refetch();
 
-    const getData = async () => {
-      setIsLoading(true);
-      setRefetch([]);
-      try {
-        const response = await fetch(url, {
-          signal: abortController.signal,
-        });
-        if (!response.ok) {
-          throw Error(" Something wrong with fetching");
-        }
-        const data = await response.json();
-        setData(data);
-      } catch (error) {
-        SetError(error.message);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-    getData();
     return () => {
       abortController.abort();
     };
-  }, [url]);
+  }, [refetch, abortController]);
 
   return [data, error, isLoading, refetch];
 };
